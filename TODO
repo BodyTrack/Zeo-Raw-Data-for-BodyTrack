@@ -1,4 +1,10 @@
-Git setup
-Figure out how to remotely cat
-Commandline arg to select file
+Fix plot to include times
+
+-----------------------------
+DONE
 Commandline arg to block until new data, optionally
+Git setup
+Commandline arg to select file
+Figure out how to remotely cat
+Truncate CSV output files
+Different CSV output filename
