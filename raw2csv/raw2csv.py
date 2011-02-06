@@ -1,5 +1,8 @@
 #!/usr/bin/python -d
 # -*- coding: utf-8 -*-
+
+# Original version from chadjoan in the Zeo developer's forum:  http://blog.myzeo.com/forum/zeo-raw-data-library/recording-real-time-data-into-csv-files-and-wake-when-light/
+
 # DataRecorder.pyw
 #
 # Streams the real-time data coming from a Zeo unit into .csv files.
