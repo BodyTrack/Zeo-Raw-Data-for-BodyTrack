@@ -1,4 +1,4 @@
-DATE ?= 110205
+DATE ?= 110206
 
 ZEOS = $(wildcard *.zeo)
 CSVS = $(patsubst %.zeo,%.hypnogram.csv,$(ZEOS))
@@ -16,18 +16,24 @@ current: anne-$(DATE).hypnogram.csv
 sync:
 	rsync -av john-2.local:/Users/anne/education/bodytrack/zeologger/raw-data/\*.zeo .
 
-connect:
-	connect.sh anne-$(DATE).zeo
+follow:
+	ssh john-2.local tail -f -c +0 /Users/anne/education/bodytrack/zeologger/raw-data/anne-$(DATE).zeo > data/anne-$(DATE).zeo
+
+follow-ekg:
+	ssh john-2.local tail -f -c +0 /Users/anne/education/bodytrack/zeologger/raw-data/anne-ekg-$(DATE).zeo > data/anne-ekg-$(DATE).zeo
 
 csv:
-	-./raw2csv.py -f anne-$(DATE).zeo
+	-./raw2csv.py -f data/anne-$(DATE).zeo
+
+csv-ekg:
+	-./raw2csv.py -f data/anne-ekg-$(DATE).zeo
 
 plot-follow:
 	echo "set datafile separator ','" > gnuplot.script
 	echo "set xdata time" >> gnuplot.script
 	echo "set timefmt '%m/%d/%Y %H:%M:%S'" >> gnuplot.script
 	echo "set format x '%H:%M:%S'" >> gnuplot.script
-	echo "plot 'anne-$(DATE).hypnogram.csv' every ::2 using 1:6" >> gnuplot.script
+	echo "plot 'data/anne-$(DATE).hypnogram.csv' every ::2 using 1:6 with impulses" >> gnuplot.script
 	echo "! sleep 5" >> gnuplot.script
 	echo "reread" >> gnuplot.script
 	gnuplot gnuplot.script
@@ -37,7 +43,7 @@ plot:
 	echo "set xdata time" >> gnuplot.script
 	echo "set timefmt '%m/%d/%Y %H:%M:%S'" >> gnuplot.script
 	echo "set format x '%H:%M:%S'" >> gnuplot.script
-	echo "plot 'anne-$(DATE).hypnogram.csv' every ::2 using 1:6" >> gnuplot.script
+	echo "plot 'data/anne-$(DATE).hypnogram.csv' every ::2 using 1:6" >> gnuplot.script
 	gnuplot -p gnuplot.script
 
 

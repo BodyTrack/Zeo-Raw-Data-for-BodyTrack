@@ -1,4 +1,4 @@
-BINARIES=hex2binary dump-serial
+BINARIES=hex2binary dump-serial trim-ff
 all: $(BINARIES)
 
 dump-serial: dump-serial.cpp
@@ -6,6 +6,9 @@ dump-serial: dump-serial.cpp
 
 hex2binary: hex2binary.c
 	gcc -Wall hex2binary.c -o hex2binary
+
+trim-ff: trim-ff.cpp
+	g++ -Wall trim-ff.cpp -o trim-ff
 
 clean:
 	rm -f $(BINARIES)
