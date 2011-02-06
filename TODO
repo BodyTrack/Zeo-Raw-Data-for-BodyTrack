@@ -1,7 +1,9 @@
-Fix plot to include times
+unhardcode path to ZeoRawData library in raw2csv
+upload to bodytrack.org
 
 -----------------------------
 DONE
+Fix plot to include times
 Commandline arg to block until new data, optionally
 Git setup
 Commandline arg to select file
